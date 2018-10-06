@@ -4,16 +4,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-light_file_path = 'spec_data.xlsx'
-wave_file_path = 'wavelength.xlsx'
+light_file_path = '../data/spec_data.xlsx'
+wave_file_path = '../data/wavelength.xlsx'
 
 
 def read_light(row=0):
     data = pd.read_excel(light_file_path)
     light_data_frame = data.iloc[row, 7]
-    light = light_data_frame.encode('utf-8').split(',')
+    light = light_data_frame.split(',')
     light_bg_data_frame = data.iloc[row, 8]
-    light_bg = light_bg_data_frame.encode('utf-8').split(',')
+    light_bg = light_bg_data_frame.split(',')
     y = []
     for i in range(0, len(light)):
         y.append(int(light_bg[i]) - int(light[i]))
