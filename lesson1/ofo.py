@@ -18,7 +18,7 @@ def use_csv():
                 x.append(line[5])
                 y.append(line[6])
                 num += 1
-    print '数据点总数：%d' % num
+    # print '数据点总数：%d' % num
     return x, y
 
 

@@ -6,7 +6,7 @@ import pandas as pd
 
 light_file_path = '../data/spec_data.xlsx'
 wave_file_path = '../data/wavelength.xlsx'
-
+pic_save_path = '../pic/'
 
 def read_light(row=0):
     data = pd.read_excel(light_file_path)
@@ -34,9 +34,11 @@ def read_wave_length():
 
 def main():
     x = read_wave_length()
-    y = read_light()
-    plt.plot(x, y, label='light', c='g')
-    plt.show()
+    for index in range(0, 46):
+        y = read_light(index)
+        plt.plot(x, y, label='light', c='g')
+        plt.savefig(pic_save_path + str(index) + '.png')
+        plt.cla()
 
 
 if __name__ == '__main__':
