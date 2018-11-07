@@ -109,8 +109,9 @@ batch_size = 256
 batch_num = int(len(train_img) / batch_size)
 
 # 建立输入占位符
-x_ = tf.placeholder(tf.float32, [None, 32, 32])
-y_ = tf.placeholder(tf.float32, [None, num_classes])
+with tf.name_scope('input'):
+    x_ = tf.placeholder(tf.float32, [None, 32, 32], name='x-input')
+    y_ = tf.placeholder(tf.float32, [None, num_classes], name='y-input')
 
 x_image = tf.reshape(x_, [-1, 32, 32, 1])
 
@@ -161,6 +162,10 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 # 训练
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
+
+    # 记录写到文件。
+    writer = tf.summary.FileWriter('G:\\ai\\Homework2\\logs\\', sess.graph)
+
     for i in range(100):
 #        x_train, y_train = shuffle_data(train_img, train_cla)
 #        Y_train = keras.utils.to_categorical(np.array(y_train), num_classes)
